@@ -16,6 +16,7 @@ class LinkedList:
         return self.head
 
     def append(self, data):
+        '''Adds a node to the end of the linked list'''
         node = self.Node(data)
         current = self.head
         while True:
