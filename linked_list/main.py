@@ -25,6 +25,20 @@ class LinkedList:
                 return node
             current = current.next
 
+    def insert(self, stored_node, data):
+        '''Inserts a node in the middle of the linked list'''
+        import pdb; pdb.set_trace()
+        node = self.Node(data)
+        current = self.head
+        while current.data != stored_node:
+            current = current.next
+        old_next_node = current.next
+        current.next = node
+        node.next = old_next_node
+        return node
+
+
+
 
 
     class Node:
