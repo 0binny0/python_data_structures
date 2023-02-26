@@ -25,11 +25,11 @@ class LinkedList:
                 return node
             current = current.next
 
-    def insert(self, stored_node, data):
+    def insert(self, stored_node_value, data):
         '''Inserts a node in the middle of the linked list'''
         node = self.Node(data)
         current = self.head
-        while current.data != stored_node:
+        while current.data != stored_node_value:
             current = current.next
         old_next_node = current.next
         current.next = node
