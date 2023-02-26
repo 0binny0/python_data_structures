@@ -45,6 +45,20 @@ class TestAppendNodeToLinkedList(TestCase):
             self.assertIsNone(self.linked_list.head.next.next)
 
 
+class TestInsertNodeToLinkedList(TestCase):
+
+    def setUp(self):
+        self.linked_list = LinkedList()
+        self.linked_list.head = LinkedList.Node(1)
+        self.linked_list.head.next = LinkedList.Node(2)
+        node = self.linked_list.insert(1, 3)
+
+    def test_node_inserted_between_existing_nodes(self):
+        self.assertEqual(self.linked_list.head.data, 1)
+        self.assertEqual(self.linked_list.head.next.data, 3)
+        self.assertEqual(self.linked_list.head.next.next.data, 2)
+
+
 
 if __name__ == "__main__":
     main()
