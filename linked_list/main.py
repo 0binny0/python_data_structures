@@ -25,19 +25,32 @@ class LinkedList:
                 return node
             current = current.next
 
-    def insert(self, stored_node_value, data):
+    def insert(self, node_value, data):
         '''Inserts a node in the middle of the linked list'''
         node = self.Node(data)
-        current = self.head
-        while current.data != stored_node_value:
-            current = current.next
-        old_next_node = current.next
-        current.next = node
+        current_node = self.head
+        while current_node.data != node_value:
+            current_node = current_node.next
+        old_next_node = current_node.next
+        current_node.next = node
         node.next = old_next_node
         return node
 
-
-
+    def delete(self, node_value):
+        '''Delete a node from the linked list'''
+        current_node = self.head
+        while current_node is not None:
+            if current_node is self.head and current_node.data == node_value:
+                head = current_node.next
+                self.head = head
+            else:
+                if current_node.next.data == node_value:
+                    removed_node = current_node.next
+                    new_next_node = removed_node.next
+                    current_node.next = new_next_node
+                    break
+                else:
+                    current_node = current_node.next
 
 
     class Node:
