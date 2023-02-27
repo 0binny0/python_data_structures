@@ -43,6 +43,7 @@ class LinkedList:
             if current_node is self.head and current_node.data == node_value:
                 head = current_node.next
                 self.head = head
+                break
             else:
                 if current_node.next.data == node_value:
                     removed_node = current_node.next
