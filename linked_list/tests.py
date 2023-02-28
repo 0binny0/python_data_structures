@@ -73,5 +73,26 @@ class TestDeleteNodeFromLinkedList(TestCase):
     def test_search_for_node_and_delete(self):
         self.assertEqual(self.linked_list.head.next.data, 3)
 
+
+class TestLinkedListIteration(TestCase):
+
+    def setUp(self):
+        self.linked_list = LinkedList()
+        node3 = LinkedList.Node(3)
+        node2 = LinkedList.Node(2)
+        head = LinkedList.Node(1)
+        self.linked_list.head = head
+        self.linked_list.head.next = node2
+        self.linked_list.head.next.next = node3
+        generator = self.linked_list.iter()
+        self.n1 = next(generator)
+        self.n2 = next(generator)
+        self.n3 = next(generator)
+
+    def test_linked_list_looping(self):
+        self.assertEqual(self.n1.data, 1)
+        self.assertEqual(self.n2.data, 2)
+        self.assertEqual(self.n3.data, 3)
+
 if __name__ == "__main__":
     main()

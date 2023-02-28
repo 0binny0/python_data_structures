@@ -53,6 +53,15 @@ class LinkedList:
                 else:
                     current_node = current_node.next
 
+    def iter(self):
+        if self.head is None:
+            raise StopIteration("No nodes exist")
+        current_node = self.head
+        while current_node is not None:
+            yield current_node.data
+            current_node = current_node.next
+        raise StopIteration("End of the list")
+
 
     class Node:
 
