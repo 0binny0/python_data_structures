@@ -5,6 +5,7 @@ class LinkedList:
         self.head = None
 
     def __str__(self):
+        '''A string representation of the linked list'''
         nodes = ""
         current_node = self.head
         while current_node is not None:
@@ -16,12 +17,22 @@ class LinkedList:
         return nodes
 
     def __contains__(self, number):
+        '''Checks for whether a node exists with the given number'''
         current_node = self.head
         while current_node is not None:
             if current_node.data == number:
                 return True
             current_node = current_node.next
         return False
+
+    def __len__(self):
+        '''References the total number of nodes in the linked list'''
+        total_nodes = 0
+        current_node = self.head
+        while current_node is not None:
+            total_nodes += 1
+            current_node = current_node.next
+        return total_nodes
 
     def prepend(self, data):
         '''Sets the head of the linked list'''
@@ -32,7 +43,6 @@ class LinkedList:
             old_head = self.head
             node.next = old_head
             self.head = node
-        return self.head
 
     def append(self, data):
         '''Adds a node to the end of the linked list'''
@@ -53,7 +63,6 @@ class LinkedList:
         old_next_node = current_node.next
         current_node.next = node
         node.next = old_next_node
-        return node
 
     def delete(self, node_value):
         '''Delete a node from the linked list'''
@@ -80,15 +89,6 @@ class LinkedList:
             yield current_node.data
             current_node = current_node.next
         return
-
-
-    def __len__(self):
-        total_nodes = 0
-        current_node = self.head
-        while current_node is not None:
-            total_nodes += 1
-            current_node = current_node.next
-        return total_nodes
 
 
     class Node:
