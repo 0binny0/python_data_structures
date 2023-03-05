@@ -4,6 +4,25 @@ class LinkedList:
     def __init__(self):
         self.head = None
 
+    def __str__(self):
+        nodes = ""
+        current_node = self.head
+        while current_node is not None:
+            if current_node.next is None:
+                nodes += f"[{current_node.data}]"
+            else:
+                nodes += f"[{current_node.data}] - "
+            current_node = current_node.next
+        return nodes
+
+    def __contains__(self, number):
+        current_node = self.head
+        while current_node is not None:
+            if current_node.data == number:
+                return True
+            current_node = current_node.next
+        return False
+
     def prepend(self, data):
         '''Sets the head of the linked list'''
         node = self.Node(data)
@@ -55,12 +74,21 @@ class LinkedList:
 
     def iter(self):
         if self.head is None:
-            raise StopIteration("No nodes exist")
+            raise StopIteration
         current_node = self.head
         while current_node is not None:
             yield current_node.data
             current_node = current_node.next
-        raise StopIteration("End of the list")
+        return
+
+
+    def __len__(self):
+        total_nodes = 0
+        current_node = self.head
+        while current_node is not None:
+            total_nodes += 1
+            current_node = current_node.next
+        return total_nodes
 
 
     class Node:
@@ -71,3 +99,22 @@ class LinkedList:
 
         def __str__(self):
             return f"Node ({self.data})"
+
+def main():
+    linked_list = LinkedList()
+    while True:
+        operation, node = get_list_operation(linked_list)
+        if not node:
+            continue
+        else:
+            if operation == "SET":
+                linked_list.prepend(node)
+            elif operation == "APPEND":
+                linked_list.append(node)
+            elif operation == "DELETE":
+                linked_list.remove(node)
+            elif operation == "INSERT":
+                # replaced_node = get_replaced_node(linked_list)
+                linked_list.insert(node, replaced_node)
+            else:
+                sys.exit()
