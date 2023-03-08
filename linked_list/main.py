@@ -1,4 +1,9 @@
 
+import sys
+
+from funcs import prompt_list_operation, get_replaced_node, cls
+
+
 class LinkedList:
 
     def __init__(self):
@@ -40,29 +45,45 @@ class LinkedList:
         if self.head is None:
             self.head = node
         else:
-            old_head = self.head
-            node.next = old_head
+            next_node = self.head.next
             self.head = node
+            self.head.next = next_node
 
     def append(self, data):
         '''Adds a node to the end of the linked list'''
         node = self.Node(data)
-        current = self.head
-        while True:
-            if current.next is None:
-                current.next = node
-                return node
-            current = current.next
+        current_node = self.head
+        if current_node is None:
+            self.head = node
+        else:
+            while True:
+                if current_node.next is None:
+                    current_node.next = node
+                    return node
+                current_node = current_node.next
 
     def insert(self, node_value, data):
         '''Inserts a node in the middle of the linked list'''
-        node = self.Node(data)
+        node = self.Node(node_value)
         current_node = self.head
-        while current_node.data != node_value:
-            current_node = current_node.next
-        old_next_node = current_node.next
-        current_node.next = node
-        node.next = old_next_node
+        if current_node.data == data:
+            old_head = self.head
+            new_head = node
+            self.head = new_head
+            self.head.next = old_head
+        else:
+            while current_node is not None:
+                next_node = getattr(current_node, 'next')
+                if next_node is not None:
+                    if current_node.next.data != data:
+                        current_node = current_node.next
+                    else:
+                        new_next_node = current_node.next
+                        node.next = new_next_node
+                        current_node.next = node
+                        break
+
+
 
     def delete(self, node_value):
         '''Delete a node from the linked list'''
@@ -103,8 +124,12 @@ class LinkedList:
 def main():
     linked_list = LinkedList()
     while True:
-        operation, node = get_list_operation(linked_list)
+        cls()
+        operation, node = prompt_list_operation(linked_list)
         if not node:
+            if operation == "EXIT":
+                cls()
+                sys.exit()
             continue
         else:
             if operation == "SET":
@@ -112,9 +137,13 @@ def main():
             elif operation == "APPEND":
                 linked_list.append(node)
             elif operation == "DELETE":
-                linked_list.remove(node)
+                linked_list.delete(node)
             elif operation == "INSERT":
-                # replaced_node = get_replaced_node(linked_list)
+                replaced_node = get_replaced_node(linked_list)
+                if not replaced_node:
+                    continue
                 linked_list.insert(node, replaced_node)
-            else:
-                sys.exit()
+
+
+if __name__ == "__main__":
+    main()

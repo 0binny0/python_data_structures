@@ -3,7 +3,7 @@ from unittest import TestCase, main
 from unittest.mock import patch, Mock
 
 from main import LinkedList
-from funcs import get_node_value
+from funcs import get_node_value, get_replaced_node
 
 class TestLinkedListHead(TestCase):
     '''Verify a new linked list has a head of None'''
@@ -19,13 +19,13 @@ class TestPrependNodeToLinkedList(TestCase):
 
     def setUp(self):
         self.initial_head = LinkedList.Node(1)
-        linked_list = LinkedList()
-        linked_list.head = self.initial_head
-        self.updated_head = linked_list.prepend(2)
+        self.linked_list = LinkedList()
+        self.linked_list.head = self.initial_head
+        self.linked_list.prepend(2)
 
     def test_prepend_sets_new_head(self):
-        self.assertEqual(self.updated_head.data, 2)
-        self.assertEqual(self.updated_head.next.data, 1)
+        self.assertEqual(self.linked_list.head.data, 2)
+        self.assertEqual(self.linked_list.head.next, None)
 
 
 class TestAppendNodeToLinkedList(TestCase):
@@ -54,11 +54,11 @@ class TestInsertNodeToLinkedList(TestCase):
         head = LinkedList.Node(1)
         head.next = node2
         self.linked_list.head = head
-        self.linked_list.insert(1, 3)
+        self.linked_list.insert(3, 1)
 
     def test_node_inserted_between_existing_nodes(self):
-        self.assertEqual(self.linked_list.head.data, 1)
-        self.assertEqual(self.linked_list.head.next.data, 3)
+        self.assertEqual(self.linked_list.head.data, 3)
+        self.assertEqual(self.linked_list.head.next.data, 1)
         self.assertEqual(self.linked_list.head.next.next.data, 2)
 
 
@@ -156,7 +156,6 @@ class TestGetNodeValue(TestCase):
     def test_value_submitted_for_linked_list(self):
         self.assertTrue(self.mock.called)
         self.assertEqual(self.mock.call_count, 1)
-
 
 
 
