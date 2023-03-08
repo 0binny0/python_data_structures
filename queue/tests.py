@@ -3,6 +3,7 @@ from unittest import TestCase, main
 
 from main import Queue
 
+
 class TestEnqueueOperation(TestCase):
 
     def setUp(self):
