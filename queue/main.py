@@ -5,6 +5,7 @@ class Queue:
         self.head = None
 
     def enqueue(self, value):
+        '''Adds a node to the queue'''
         node = Node(value)
         current_node = self.head
         while True:
@@ -20,12 +21,14 @@ class Queue:
             break
 
     def dequeue(self):
+        '''Removes the current head from the queue and returns it'''
         new_head = self.head.next
         node_value = self.head.data
         self.head = new_head
         return node_value
 
     def peek(self):
+        '''Preview the head of the queue'''
         current_head = self.head.data
         print(f"Next element in queue: {current_head}")
 
