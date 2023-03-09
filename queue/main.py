@@ -25,6 +25,11 @@ class Queue:
         self.head = new_head
         return node_value
 
+    def peek(self):
+        import pdb; pdb.set_trace()
+        current_head = self.head.data
+        print(f"Next element in queue: {current_head}")
+
 
 class Node:
 
