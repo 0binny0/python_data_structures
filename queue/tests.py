@@ -1,5 +1,6 @@
 
 from unittest import TestCase, main
+from unittest.mock import patch
 
 from main import Queue
 
@@ -28,6 +29,18 @@ class TestDequeueOperation(TestCase):
         self.assertEqual(self.value, 1)
         self.assertEqual(self.queue_head.data, 2)
         self.assertIsNone(self.queue.head.next)
+
+
+class TestSeekOperation(TestCase):
+
+    def setUp(self):
+        self.queue = Queue()
+        self.queue.enqueue(1)
+
+    def test_queue_preview_head(self):
+        with patch("main.print", return_value="Next element in queue: 1") as mock_print:
+            self.queue.peek()
+            self.assertTrue(mock_print.called)
 
 if __name__ == "__main__":
     main()
