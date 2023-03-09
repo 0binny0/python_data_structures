@@ -7,12 +7,23 @@ class Queue:
     def enqueue(self, value):
         node = Node(value)
         current_node = self.head
-        while current_node is not None:
-            current_node = current_node.next
-        if current_node is self.head:
-            self.head = node
-        else:
-            current_node = node
+        while True:
+            if self.head is None:
+                self.head = node
+            else:
+                next_node = getattr(current_node, 'next')
+                if next_node is not None:
+                    current_node = current_node.next
+                    continue
+                else:
+                    current_node.next = node
+            break
+
+    def dequeue(self):
+        new_head = self.head.next
+        node_value = self.head.data
+        self.head = new_head
+        return node_value
 
 
 class Node:
