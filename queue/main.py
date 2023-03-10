@@ -1,8 +1,17 @@
 
+from classes import QueueIterator
+
 class Queue:
 
     def __init__(self):
         self.head = None
+
+    def __str__(self):
+        nodes = ", ".join(f"{node}" for node in self)
+        return f"[{nodes}]"
+
+    def __iter__(self):
+        return QueueIterator(self)
 
     def enqueue(self, value):
         '''Adds a node to the queue'''
@@ -28,10 +37,7 @@ class Queue:
         return node_value
 
     def peek(self):
-<<<<<<< HEAD
         '''Preview the head of the queue'''
-=======
->>>>>>> d8ec971f58ba2aeef0eb7a8a1d57f17cbc84d02b
         current_head = self.head.data
         print(f"Next element in queue: {current_head}")
 

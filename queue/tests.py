@@ -42,5 +42,18 @@ class TestSeekOperation(TestCase):
             self.queue.peek()
             self.assertTrue(mock_print.called)
 
+
+class TestQueueStringMethod(TestCase):
+    '''Verify that a Queue can be represented as a string.'''
+
+    def setUp(self):
+        self.queue = Queue()
+        self.queue.enqueue(1)
+        self.queue.enqueue(2)
+        self.queue_str = str(self.queue)
+
+    def test_str_method_in_queue(self):
+        self.assertEqual(self.queue_str, "[1, 2]")
+
 if __name__ == "__main__":
     main()
