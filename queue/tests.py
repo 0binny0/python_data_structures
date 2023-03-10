@@ -55,5 +55,16 @@ class TestQueueStringMethod(TestCase):
     def test_str_method_in_queue(self):
         self.assertEqual(self.queue_str, "[1, 2]")
 
+
+class TestQueueReprMethod(TestCase):
+
+    def setUp(self):
+        self.queue = Queue()
+        self.queue.enqueue(1)
+        self.queue.enqueue(2)
+
+    def test_queue_repr_method(self):
+        self.assertEqual(repr(self.queue), "Queue([1, 2])")
+
 if __name__ == "__main__":
     main()
