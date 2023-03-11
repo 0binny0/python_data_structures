@@ -7,13 +7,16 @@ class Queue:
         self.head = None
 
     def __str__(self):
+        '''Represents the elements within the queue'''
         nodes = ", ".join(f"{node}" for node in self)
         return f"[{nodes}]"
 
     def __repr__(self):
+        '''Represents the queue for debugging'''
         return f"{self.__class__.__name__}({self})"
 
     def __iter__(self):
+        '''Iterate over the elements of the queue'''
         return QueueIterator(self)
 
     def enqueue(self, value):
