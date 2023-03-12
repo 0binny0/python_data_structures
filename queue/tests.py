@@ -3,6 +3,7 @@ from unittest import TestCase, main
 from unittest.mock import patch
 
 from main import Queue
+from funcs import get_queue_element
 
 
 class TestEnqueueOperation(TestCase):
@@ -43,28 +44,35 @@ class TestSeekOperation(TestCase):
             self.assertTrue(mock_print.called)
 
 
-class TestQueueStringMethod(TestCase):
-    '''Verify that a Queue can be represented as a string.'''
+class GenerateNewElementForQueueDisallowed(TestCase):
+    '''Verify that an attempt to add a duplicate item into
+    the queue results in no action performed.'''
 
-    def setUp(self):
-        self.queue = Queue()
-        self.queue.enqueue(1)
-        self.queue.enqueue(2)
-        self.queue_str = str(self.queue)
+    @patch("funcs.print", return_value="Invalid selection made.")
+    @patch("funcs.input", return_value="E")
+    def setUp(self, mock_input, mock_print):
+        queue = Queue()
+        queue.enqueue("A")
+        queue.enqueue("E")
+        self.value = get_queue_element(queue)
 
-    def test_str_method_in_queue(self):
-        self.assertEqual(self.queue_str, "[1, 2]")
+    def test_element_provided_for_queue(self):
+        self.assertIsNone(self.value)
 
 
-class TestQueueReprMethod(TestCase):
+class GenerateNewElementForQueueAllowed(TestCase):
+    '''Verify that an attempt to add a duplicate item into
+    the queue results in no action performed.'''
 
-    def setUp(self):
-        self.queue = Queue()
-        self.queue.enqueue(1)
-        self.queue.enqueue(2)
+    @patch("funcs.input", return_value="E")
+    def setUp(self, mock_input):
+        queue = Queue()
+        queue.enqueue("A")
+        self.value = get_queue_element(queue)
 
-    def test_queue_repr_method(self):
-        self.assertEqual(repr(self.queue), "Queue([1, 2])")
+    def test_element_provided_for_queue(self):
+        self.assertEqual(self.value, 'E')
+
 
 if __name__ == "__main__":
     main()
