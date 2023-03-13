@@ -1,5 +1,9 @@
 
+import sys
+from time import sleep
+
 from classes import QueueIterator
+from funcs import cls, get_queue_operation, get_queue_element
 
 class Queue:
 
@@ -37,15 +41,25 @@ class Queue:
 
     def dequeue(self):
         '''Removes the current head from the queue and returns it'''
-        new_head = self.head.next
-        node_value = self.head.data
-        self.head = new_head
-        return node_value
+        if self.head is None:
+            print("\nQueue is empty.")
+            sleep(1.5)
+        else:
+            new_head = self.head.next
+            node_value = self.head.data
+            self.head = new_head
+            print(f"{node_value} is removed from the queue.")
+            return node_value
 
     def peek(self):
         '''Preview the head of the queue'''
-        current_head = self.head.data
+        if self.head is None:
+            current_head = "Empty"
+        else:
+            current_head = self.head.data
         print(f"Next element in queue: {current_head}")
+        sleep(1.5)
+        return
 
 
 class Node:
@@ -53,3 +67,34 @@ class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
+
+
+def main(queue):
+    while True:
+        while True:
+            execute = get_queue_operation(queue)
+            if not execute:
+                continue
+            else:
+                break
+        if execute == "EXIT":
+            break
+        else:
+            if execute == "ADD":
+                element = get_queue_element(queue)
+                if not element:
+                    continue
+                queue.enqueue(element)
+            elif execute == "PEEK":
+                queue.peek()
+            else:
+                popped_element = queue.dequeue()
+                cls()
+            continue
+    cls()
+    sys.exit()
+
+
+if __name__ == "__main__":
+    queue = Queue()
+    main(queue)
