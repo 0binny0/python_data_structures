@@ -4,13 +4,15 @@ from time import sleep
 
 
 def get_queue_operation(queue):
+        cls()
         print(f"Queue: {queue}\nChoose from one of the following operations to execute on the queue:")
         execute = input("""
             ADD - adds an element
+            PEEK - preview the top most element in the queue
             REMOVE - removes the first element
             EXIT - exits program
         """).upper()
-        if execute not in ["ADD", "REMOVE", "EXIT"]:
+        if execute not in ["ADD", "PEEK", "REMOVE", "EXIT"]:
             print("\nInvalid command.")
             sleep(1.5)
             return
@@ -24,7 +26,7 @@ def get_queue_element(queue):
     for letter in queue:
         try:
             available_letters.remove(letter)
-        except:
+        except ValueError:
             continue
     if not available_letters:
         print("Queue is full. Removing the head will make space to add a new one.")
