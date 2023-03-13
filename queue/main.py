@@ -49,6 +49,7 @@ class Queue:
             node_value = self.head.data
             self.head = new_head
             print(f"{node_value} is removed from the queue.")
+            sleep(1.5)
             return node_value
 
     def peek(self):
