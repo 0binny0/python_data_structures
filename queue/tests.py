@@ -1,9 +1,9 @@
 
-from unittest import TestCase, main
-from unittest.mock import patch
+from unittest import TestCase, main as test
+from unittest.mock import patch, Mock
 
-from main import Queue
-from funcs import get_queue_element
+from main import Queue, main
+from funcs import get_queue_element, get_queue_operation
 
 
 class TestEnqueueOperation(TestCase):
@@ -74,5 +74,41 @@ class GenerateNewElementForQueueAllowed(TestCase):
         self.assertEqual(self.value, 'E')
 
 
+class TestMain(TestCase):
+    '''Verify that the choosen operation executes it associated method.'''
+
+    @patch("main.Queue")
+    def setUp(self, mock_queue):
+        queue = mock_queue()
+        queue.head = Mock(data="E", next=None)
+        queue.enqueue = Mock()
+        queue.dequeue = Mock()
+        queue.peek = Mock()
+        self.queue = queue
+
+    @patch("sys.exit")
+    @patch("main.get_queue_element", return_value="A")
+    @patch("main.get_queue_operation", side_effect=["ADD", "EXIT"])
+    def test_queue_enqueue_executed(self, mock_operation, mock_element, mock_exit):
+        main(self.queue)
+        self.assertTrue(self.queue.enqueue.called)
+        self.assertTrue(mock_exit.called)
+
+    @patch("sys.exit")
+    @patch("main.get_queue_operation", side_effect=["REMOVE", "EXIT"])
+    def test_queue_dequeue_executed(self, mock_operation, mock_exit):
+        main(self.queue)
+        self.assertTrue(self.queue.dequeue.called)
+        self.assertTrue(mock_exit.called)
+
+    @patch("sys.exit")
+    @patch("main.get_queue_operation", side_effect=["PEEK", "EXIT"])
+    def test_queue_peek_executed(self, mock_operation, mock_exit):
+        main(self.queue)
+        self.assertTrue(self.queue.peek.called)
+        self.assertTrue(mock_exit.called)
+
+
+
 if __name__ == "__main__":
-    main()
+    test()
