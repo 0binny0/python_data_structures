@@ -22,6 +22,7 @@ def cls():
     os.system('cls' if os.name=='nt' else 'clear')
 
 def get_queue_element(queue):
+    cls()
     available_letters = ['A', 'C', 'E', 'G', 'I', 'K', 'M', 'O', 'Q', 'S']
     for letter in queue:
         try:
@@ -34,7 +35,8 @@ def get_queue_element(queue):
         return
     print(f"Queue: {queue}")
     letters = f"[{', '.join(letter for letter in available_letters)}]"
-    letter = input(f"\nChoose from one of the following letters to add to the queue: {letters}")
+    prompt = "\nChoose from one of the following letters to add to the queue"
+    letter = input(f"{prompt} -  {letters}: ").upper()
     if letter not in available_letters:
         print("\n\nInvalid selection made.")
         sleep(1.5)
