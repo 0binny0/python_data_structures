@@ -5,6 +5,10 @@ class Stack:
     def __init__(self):
         self.head = None
 
+    def __str__(self):
+        elements = ", ".join([f"{element}" for element in self])
+        return f"[{elements}]"
+
     def __iter__(self):
         return StackIterator(self)
 
