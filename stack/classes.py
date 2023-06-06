@@ -18,7 +18,20 @@ class Stack:
     def __iter__(self):
         return StackIterator(self)
 
+    def push(self, data):
+        added_element = self.Element(data)
+        stack_element = self.head
+        if stack_element is self.head and self.head is None:
+            self.head = added_element
+        else:
+            while True:
+                next_element = stack_element.next
+                if next_element is None:
+                    stack_element.next = added_element
+                else:
+                    stack_element = stack_element.next
 
+                    
     class Element:
 
         def __init__(self, data):
