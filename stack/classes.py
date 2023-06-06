@@ -9,6 +9,12 @@ class Stack:
         elements = ", ".join([f"{element}" for element in self])
         return f"[{elements}]"
 
+    def __len__(self):
+        length = 0
+        for element in self:
+            length += 1
+        return length
+
     def __iter__(self):
         return StackIterator(self)
 

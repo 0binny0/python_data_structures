@@ -33,5 +33,18 @@ class TestStackString(TestCase):
     def test_stack_str_method(self):
         self.assertEqual(self.stack_string, "[1, 2]")
 
+
+class TestStackLenMethod(TestCase):
+    '''Verify that the length of a stack can be tracked.'''
+
+    def setUp(self):
+        stack = Stack()
+        element_1 = stack.Element(1)
+        stack.head = element_1
+        self.stack_length = len(stack)
+
+    def test_new_element_added(self):
+        self.assertEqual(self.stack_length, 1)
+        
 if __name__ == "__main__":
     main()
