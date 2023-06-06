@@ -43,8 +43,19 @@ class TestStackLenMethod(TestCase):
         stack.head = element_1
         self.stack_length = len(stack)
 
-    def test_new_element_added(self):
+    def test_length_of_stack(self):
         self.assertEqual(self.stack_length, 1)
-        
+
+class TestStackPopMethod(TestCase):
+    '''Verify that a new element is appended to the stack.'''
+
+    def setUp(self):
+        stack = Stack()
+        stack.push(1)
+        self.elements = str(stack)
+
+    def test_new_element_added(self):
+        self.assertEqual(self.elements, "[1]")
+
 if __name__ == "__main__":
     main()
