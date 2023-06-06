@@ -36,6 +36,16 @@ class Stack:
         stack_element = self.head
         if stack_element is None:
             raise Exception("No elements are in the stack")
+        while True:
+            if stack_element.next is not None:
+                next_elements_next = stack_element.next.next
+                if next_elements_next is not None:
+                    stack_element = stack_element.next
+                else:
+                    popped_value = stack_element.next.data
+                    stack_element.next = None
+                    return popped_value
+
 
 
     class Element:

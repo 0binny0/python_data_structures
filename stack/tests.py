@@ -46,11 +46,8 @@ class TestStackLenMethod(TestCase):
     def test_length_of_stack(self):
         self.assertEqual(self.stack_length, 1)
 
-<<<<<<< HEAD
+
 class TestStackPushMethod(TestCase):
-=======
-class TestStackPopMethod(TestCase):
->>>>>>> ee573ae04e98e2d90d8a4102bd1dd8bdd18be0b4
     '''Verify that a new element is appended to the stack.'''
 
     def setUp(self):
@@ -61,7 +58,6 @@ class TestStackPopMethod(TestCase):
     def test_new_element_added(self):
         self.assertEqual(self.elements, "[1]")
 
-<<<<<<< HEAD
 
 class TestEmptyStackPopMethod(TestCase):
     '''Verify that .pop() cannot be called on an empty stack'''
@@ -73,7 +69,18 @@ class TestEmptyStackPopMethod(TestCase):
         with self.assertRaises(Exception):
             self.stack.pop()
 
-=======
->>>>>>> ee573ae04e98e2d90d8a4102bd1dd8bdd18be0b4
+
+class TestElementPoppedFromStack(TestCase):
+    '''Verify that the last element from the stack is removed calling .pop()'''
+
+    def setUp(self):
+        stack = Stack()
+        stack.push(1)
+        stack.push(2)
+        self.popped_element = stack.pop()
+
+    def test_element_returned(self):
+        self.assertEqual(self.popped_element, 2)
+
 if __name__ == "__main__":
     main()
