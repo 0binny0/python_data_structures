@@ -30,6 +30,7 @@ class Stack:
                     stack_element.next = added_element
                 else:
                     stack_element = stack_element.next
+                    continue
                 return
 
     def pop(self):
@@ -37,14 +38,20 @@ class Stack:
         if stack_element is None:
             raise Exception("No elements are in the stack")
         while True:
-            if stack_element.next is not None:
-                next_elements_next = stack_element.next.next
-                if next_elements_next is not None:
-                    stack_element = stack_element.next
-                else:
-                    popped_value = stack_element.next.data
-                    stack_element.next = None
-                    return popped_value
+            if stack_element is self.head and self.head.next is None:
+                popped_value = stack_element.data
+                self.head = None
+            else:
+                if stack_element.next is not None:
+                    next_elements_next = stack_element.next.next
+                    if next_elements_next is not None:
+                        stack_element = stack_element.next
+                        continue
+                    else:
+                        popped_value = stack_element.next.data
+                        stack_element.next = None
+            return popped_value
+
 
 
 
