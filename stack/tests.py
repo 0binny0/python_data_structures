@@ -58,5 +58,15 @@ class TestStackPushMethod(TestCase):
         self.assertEqual(self.elements, "[1]")
 
 
+class TestEmptyStackPopMethod(TestCase):
+    '''Verify that .pop() cannot be called on an empty stack'''
+
+    def setUp(self):
+        self.stack = Stack()
+
+    def test_empty_stack_raises_error(self):
+        with self.assertRaises(Exception):
+            self.stack.pop()
+
 if __name__ == "__main__":
     main()
