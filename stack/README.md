@@ -10,4 +10,4 @@
 * Add an element to the back of a stack
 * Remove an element from the back of a stack
 
-(demo.png)
+![](demo.png)
