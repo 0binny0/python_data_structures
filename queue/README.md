@@ -10,3 +10,7 @@
 * Inserts an element to the end of the queue
 * Removes the first element of the queue
 * Preview the first element of the queue
+
+### Demo
+
+![](demo.gif)
