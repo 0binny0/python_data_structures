@@ -14,4 +14,3 @@
 
 ## Demo
 
-![](demo.gif)
